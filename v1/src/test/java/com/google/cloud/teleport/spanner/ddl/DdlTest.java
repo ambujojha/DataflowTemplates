@@ -42,7 +42,9 @@ import java.util.Collection;
 import java.util.List;
 import org.junit.Test;
 
-/** Test coverage for {@link Ddl}. */
+/**
+ * Test coverage for {@link Ddl}.
+ */
 public class DdlTest {
 
   @Test
@@ -275,10 +277,10 @@ public class DdlTest {
     assertThat(
         ddl.prettyPrint(),
         equalToCompressingWhiteSpace("CREATE TABLE `Users` ("
-                + " `id` INT64 NOT NULL,"
-                + " `embedding_vector` ARRAY<FLOAT64>(vector_length=>128),"
-                + " ) PRIMARY KEY (`id` ASC)"
-                ));
+            + " `id` INT64 NOT NULL,"
+            + " `embedding_vector` ARRAY<FLOAT64>(vector_length=>128),"
+            + " ) PRIMARY KEY (`id` ASC)"
+        ));
     assertNotEquals(ddl.hashCode(), 0);
   }
 
@@ -305,7 +307,7 @@ public class DdlTest {
     assertThat(
         ddl.prettyPrint(),
         equalToCompressingWhiteSpace(
-                 " CREATE TABLE \"Users\" ("
+            " CREATE TABLE \"Users\" ("
                 + " \"id\" bigint NOT NULL,"
                 + " \"embedding_vector\" double precision[] vector length 64,"
                 + " PRIMARY KEY (\"id\")"

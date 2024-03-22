@@ -52,7 +52,8 @@ public class InformationSchemaScannerIT {
 
   private final String dbId = "informationschemascannertest";
 
-  @Rule public final SpannerServerResource spannerServer = new SpannerServerResource();
+  @Rule
+  public final SpannerServerResource spannerServer = new SpannerServerResource();
 
   @Before
   public void setup() {

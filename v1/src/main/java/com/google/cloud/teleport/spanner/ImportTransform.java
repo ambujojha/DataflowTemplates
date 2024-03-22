@@ -89,7 +89,9 @@ import org.joda.time.Duration;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** A Beam transform that imports a Cloud Spanner database from a set of Avro files. */
+/**
+ * A Beam transform that imports a Cloud Spanner database from a set of Avro files.
+ */
 public class ImportTransform extends PTransform<PBegin, PDone> {
 
   private static final Logger LOG = LoggerFactory.getLogger(ImportTransform.class);
@@ -288,7 +290,9 @@ public class ImportTransform extends PTransform<PBegin, PDone> {
     return PDone.in(begin.getPipeline());
   }
 
-  /** Read contents of the top-level manifest file. */
+  /**
+   * Read contents of the top-level manifest file.
+   */
   @VisibleForTesting
   static class ReadExportManifestFile extends PTransform<PBegin, PCollection<Export>> {
 
@@ -425,12 +429,16 @@ public class ImportTransform extends PTransform<PBegin, PDone> {
       return pendingChangeStreamsTag;
     }
 
-    private static final TupleTag<Ddl> ddlObjectTag = new TupleTag<Ddl>() {};
-    private static final TupleTag<List<String>> pendingIndexesTag = new TupleTag<List<String>>() {};
+    private static final TupleTag<Ddl> ddlObjectTag = new TupleTag<Ddl>() {
+    };
+    private static final TupleTag<List<String>> pendingIndexesTag = new TupleTag<List<String>>() {
+    };
     private static final TupleTag<List<String>> pendingForeignKeysTag =
-        new TupleTag<List<String>>() {};
+        new TupleTag<List<String>>() {
+        };
     private static final TupleTag<List<String>> pendingChangeStreamsTag =
-        new TupleTag<List<String>>() {};
+        new TupleTag<List<String>>() {
+        };
 
     public CreateTables(
         SpannerConfig spannerConfig,
@@ -573,8 +581,8 @@ public class ImportTransform extends PTransform<PBegin, PDone> {
                             // possible since foreign keys may introduce circular relationships.
                             if (earlyIndexCreateFlag.get()
                                 && ((createForeignKeyStatements.size()
-                                        + createIndexStatements.size())
-                                    >= EARLY_INDEX_CREATE_THRESHOLD)) {
+                                + createIndexStatements.size())
+                                >= EARLY_INDEX_CREATE_THRESHOLD)) {
                               ddlStatements.addAll(createIndexStatements);
                               c.output(pendingIndexesTag, new ArrayList<String>());
                             } else {
@@ -611,8 +619,8 @@ public class ImportTransform extends PTransform<PBegin, PDone> {
                             try {
                               op.get(ddlCreationTimeoutInMinutes.get(), TimeUnit.MINUTES);
                             } catch (InterruptedException
-                                | ExecutionException
-                                | TimeoutException e) {
+                                     | ExecutionException
+                                     | TimeoutException e) {
                               throw new RuntimeException(e);
                             }
                             c.output(mergedDdl.build());
@@ -678,9 +686,12 @@ public class ImportTransform extends PTransform<PBegin, PDone> {
     }
   }
 
-  /** Expands {@link Export} as a PCollection of (table, file) pairs that should be imported. */
+  /**
+   * Expands {@link Export} as a PCollection of (table, file) pairs that should be imported.
+   */
   public static class ReadManifestFiles
       extends PTransform<PCollection<Export>, PCollection<KV<String, String>>> {
+
     private final ValueProvider<String> importDirectory;
 
     public ReadManifestFiles(ValueProvider<String> importDirectory) {

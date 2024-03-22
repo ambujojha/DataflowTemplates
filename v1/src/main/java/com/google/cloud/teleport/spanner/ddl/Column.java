@@ -24,7 +24,9 @@ import java.io.IOException;
 import java.io.Serializable;
 import javax.annotation.Nullable;
 
-/** Cloud Spanner column. */
+/**
+ * Cloud Spanner column.
+ */
 @AutoValue
 public abstract class Column implements Serializable {
 
@@ -131,7 +133,9 @@ public abstract class Column implements Serializable {
     return SizedType.typeString(type(), size());
   }
 
-  /** A builder for {@link Column}. */
+  /**
+   * A builder for {@link Column}.
+   */
   @AutoValue.Builder
   public abstract static class Builder {
 

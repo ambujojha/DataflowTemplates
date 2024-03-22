@@ -35,8 +35,11 @@ import org.apache.beam.sdk.io.gcp.spanner.SpannerConfig;
 import org.apache.beam.sdk.options.ValueProvider;
 import org.junit.rules.ExternalResource;
 
-/** Facilitates setup and deletion of a Spanner database for integration tests. */
+/**
+ * Facilitates setup and deletion of a Spanner database for integration tests.
+ */
 public class SpannerServerResource extends ExternalResource {
+
   // Modify the following parameters to match your Cloud Spanner instance.
   private static final String EMULATOR_HOST = System.getenv("SPANNER_EMULATOR_HOST");
   private static final String DEFAULT_PROJECT_ID = "span-cloud-testing";
